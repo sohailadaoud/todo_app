@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Home/home_screen.dart';
+import 'package:todo_app/Home/task_list/edit_task_tab.dart';
 import 'package:todo_app/my_theme.dart';
 import 'package:todo_app/provider/app_config_provider.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
+        EditTaskTab.routeName: (context) => EditTaskTab(),
       },
       theme: MyTheme.lightTheme,
       darkTheme: MyTheme.darkTheme,

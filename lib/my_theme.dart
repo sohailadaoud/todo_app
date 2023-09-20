@@ -30,6 +30,11 @@ class MyTheme {
             color: whiteColor,
             width: 4,
           ))),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: MyTheme.primaryLight, // Background color
+        ),
+      ),
       textTheme: TextTheme(
           titleLarge: TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: whiteColor),
