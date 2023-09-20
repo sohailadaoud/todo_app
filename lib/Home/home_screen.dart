@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  final List<String> appBarTitles = ['To_Do List', 'Settings'];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'To-Do List',
+          appBarTitles[selectedIndex],
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
