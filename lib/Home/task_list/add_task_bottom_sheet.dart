@@ -7,7 +7,7 @@ class AddTaskBottomSheet extends StatefulWidget {
 
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   DateTime selectedDate = DateTime.now();
-  var formKey = GlobalKey();
+  var formKey = GlobalKey<FormState>();
 
   //final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -74,7 +74,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        // addTask();
+                        addTask();
                       },
                       child: Text('Add'))
                 ],
@@ -95,10 +95,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       setState(() {});
     }
   }
-// void addTask(){
-//   if(formKey.currentState?.validate() == true){
-//
-//   }
-//
-// }
+
+  void addTask() {
+    if (formKey.currentState?.validate() == true) {}
+  }
 }
