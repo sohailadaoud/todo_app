@@ -42,6 +42,9 @@ dev_dependencies:
   calendar_timeline: ^1.1.2
   flutter_slidable: ^3.0.0
   provider: ^6.0.5
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -56,6 +59,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
