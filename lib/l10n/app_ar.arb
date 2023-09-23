@@ -1,0 +1,23 @@
+{
+"app_title" : "عمل قائمة",
+"settings" : "إعدادات",
+"theme" : "النمط",
+"english" : "إنجليزي",
+"arabic" : "عربي",
+"light" : "مضيء",
+"dark" : "ليلي",
+"language" : "اللغة",
+"description" : "وصف",
+"title_task" : "مهمة العنوان",
+"add_new_task" : "إضافة مهمة جديدة" ,
+"select_date" : "حدد تاريخ",
+"add_key" : "الإضافة" ,
+"task_list" : " قائمة المهام",
+"edit_task" : " تغيير مهمتك",
+"save" : "حفظ التغييرات"
+
+
+
+
+
+}

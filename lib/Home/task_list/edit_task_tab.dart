@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/my_theme.dart';
 import 'package:todo_app/provider/app_config_provider.dart';
@@ -22,7 +23,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit Task',
+          AppLocalizations.of(context)!.edit_task,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -39,7 +40,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
           child: Column(
             children: [
               Text(
-                'Edit Your Task',
+                AppLocalizations.of(context)!.edit_task,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Padding(
@@ -61,7 +62,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Text('select Date',
+                child: Text(AppLocalizations.of(context)!.select_date,
                     style: Theme.of(context).textTheme.titleSmall),
               ),
               InkWell(
@@ -86,7 +87,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 50),
                     child: Text(
-                      'Save Changes',
+                      AppLocalizations.of(context)!.save,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!

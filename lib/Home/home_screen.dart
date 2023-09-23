@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Home/settings/settings_tab.dart';
 import 'package:todo_app/Home/task_list/add_task_bottom_sheet.dart';
@@ -23,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          appBarTitles[selectedIndex],
+          AppLocalizations.of(context)!.app_title,
+
+          //appBarTitles[selectedIndex],
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -37,9 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {});
           },
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Task List'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings'),
+              icon: Icon(Icons.list),
+              label: AppLocalizations.of(context)!.task_list,
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: AppLocalizations.of(context)!.settings),
           ],
         ),
       ),

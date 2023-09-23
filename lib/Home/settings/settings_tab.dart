@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Home/settings/language_bottom_sheet.dart';
 import 'package:todo_app/Home/settings/theme_bottom_sheet.dart';
@@ -21,7 +22,7 @@ class _SettingsTabState extends State<SettingsTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Mode',
+            AppLocalizations.of(context)!.theme,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
@@ -45,7 +46,9 @@ class _SettingsTabState extends State<SettingsTab> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      provider.isDarkMode() ? 'Dark ' : 'Light ',
+                      provider.isDarkMode()
+                          ? AppLocalizations.of(context)!.dark
+                          : AppLocalizations.of(context)!.light,
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall!
@@ -59,7 +62,7 @@ class _SettingsTabState extends State<SettingsTab> {
             height: 40,
           ),
           Text(
-            'Language',
+            AppLocalizations.of(context)!.language,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
@@ -83,7 +86,9 @@ class _SettingsTabState extends State<SettingsTab> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Chosen Language',
+                    provider.appLanguage == 'en'
+                        ? AppLocalizations.of(context)!.english
+                        : AppLocalizations.of(context)!.arabic,
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!

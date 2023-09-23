@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/app_config_provider.dart';
@@ -20,15 +21,15 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
               provider.changeTheme(ThemeMode.light);
             },
             child: provider.appTheme == ThemeMode.light
-                ? getSelectedItemWidget("Light ")
-                : getUnSelectedItemWidget("Light ")),
+                ? getSelectedItemWidget(AppLocalizations.of(context)!.light)
+                : getUnSelectedItemWidget(AppLocalizations.of(context)!.light)),
         InkWell(
             onTap: () {
               provider.changeTheme(ThemeMode.dark);
             },
             child: provider.isDarkMode()
-                ? getSelectedItemWidget("Dark ")
-                : getUnSelectedItemWidget("Dark "))
+                ? getSelectedItemWidget(AppLocalizations.of(context)!.dark)
+                : getUnSelectedItemWidget(AppLocalizations.of(context)!.dark))
       ],
     );
   }

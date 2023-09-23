@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/Home/task_list/edit_task_tab.dart';
 import 'package:todo_app/my_theme.dart';
@@ -49,14 +50,14 @@ class TaskWidgetItem extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Title Task',
+                    child: Text(AppLocalizations.of(context)!.title_task,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                               color: Theme.of(context).primaryColor,
                             )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Des.',
+                    child: Text(AppLocalizations.of(context)!.description,
                         style: Theme.of(context).textTheme.titleSmall),
                   ),
                 ],

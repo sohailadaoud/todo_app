@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       child: Column(
         children: [
           Text(
-            'Add New Task',
+            AppLocalizations.of(context)!.add_new_task,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           Form(
@@ -56,7 +57,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('select Date',
+                    child: Text(AppLocalizations.of(context)!.select_date,
                         style: Theme.of(context).textTheme.titleSmall),
                   ),
                   InkWell(
