@@ -47,7 +47,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
                 padding: const EdgeInsets.all(4.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                      hintText: 'This is title..',
+                      hintText: AppLocalizations.of(context)!.title,
                       hintStyle: TextStyle(color: MyTheme.greyColor)),
                 ),
               ),
@@ -55,7 +55,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
                 padding: const EdgeInsets.all(4.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                      hintText: 'Task Details..',
+                      hintText: AppLocalizations.of(context)!.task_details,
                       hintStyle: TextStyle(color: MyTheme.greyColor)),
                   maxLines: 5,
                 ),

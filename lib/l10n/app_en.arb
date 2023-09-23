@@ -14,7 +14,12 @@
 "add_key" : "Add",
 "task_list" : " Task List",
 "edit_task" : " Edit Your Task",
-"save" : "Save Changes"
+"save" : "Save Changes",
+"enter_your_tasktitle" : "Enter your task title",
+"enter_your_taskdesc" : "Enter your task description",
+"title": "this is the title",
+"task_details" : "Task Details"
+
 
 
 

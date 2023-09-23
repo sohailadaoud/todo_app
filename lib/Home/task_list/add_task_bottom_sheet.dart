@@ -36,8 +36,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                         }
                         return null;
                       },
-                      decoration:
-                          InputDecoration(hintText: 'Enter your Task Title..'),
+                      decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!
+                              .enter_your_tasktitle),
                     ),
                   ),
                   Padding(
@@ -50,7 +51,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: 'Enter your Task Description..',
+                        hintText:
+                            AppLocalizations.of(context)!.enter_your_taskdesc,
                       ),
                       maxLines: 3,
                     ),
@@ -77,7 +79,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       onPressed: () {
                         addTask();
                       },
-                      child: Text('Add'))
+                      child: Text(AppLocalizations.of(context)!.add_key))
                 ],
               ))
         ],
