@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,19 +7,33 @@ import 'package:todo_app/Home/home_screen.dart';
 import 'package:todo_app/Home/task_list/edit_task_tab.dart';
 import 'package:todo_app/my_theme.dart';
 import 'package:todo_app/provider/app_config_provider.dart';
+import 'package:todo_app/providers/list_provider.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(ChangeNotifierProvider(
-      create: ((context) => AppCongigProvider()), child: MyApp()));
+  FirebaseFirestore.instance.settings =
+      Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+  await Firebase.initializeApp();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppConfigProvider()),
+        ChangeNotifierProvider(create: (context) => ListProvider()),
+        // Add ListProvider
+        // Add other providers if needed
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppCongigProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,3 +51,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// runApp(
+// ChangeNotifierProvider(
+// //create: (context) => AppCongigProvider(),
+// create: (context) => ListProvider(),
+//
+//
+// child: MyApp()));
+// }

@@ -18,7 +18,7 @@ class _EditTaskTabState extends State<EditTaskTab> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppCongigProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
 
     return Scaffold(
       appBar: AppBar(

@@ -14,7 +14,7 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppCongigProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
 
     return Container(
       margin: EdgeInsets.all(20),

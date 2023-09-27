@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/Home/task_list/edit_task_tab.dart';
 import 'package:todo_app/my_theme.dart';
 
+import '../../model/task.dart';
+
 class TaskWidgetItem extends StatelessWidget {
+  Task task;
+
+  TaskWidgetItem({required this.task});
+
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -46,22 +51,24 @@ class TaskWidgetItem extends StatelessWidget {
               ),
               Expanded(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(AppLocalizations.of(context)!.title_task,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                    child: Text(task.title ?? '',
+                        //AppLocalizations.of(context)!.title_task,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                               color: Theme.of(context).primaryColor,
                             )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(AppLocalizations.of(context)!.description,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                    child: Text(task.description ?? '',
+                        //AppLocalizations.of(context)!.description,
                         style: Theme.of(context).textTheme.titleSmall),
                   ),
-                ],
-              )),
+                    ],
+                  )),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 7, horizontal: 18),
                 decoration: BoxDecoration(

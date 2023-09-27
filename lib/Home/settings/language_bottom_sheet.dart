@@ -12,7 +12,7 @@ class LanguageBottomSheet extends StatefulWidget {
 class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppCongigProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

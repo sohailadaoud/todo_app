@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppCongigProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
