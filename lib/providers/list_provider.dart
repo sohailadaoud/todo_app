@@ -6,6 +6,7 @@ import '../model/task.dart';
 
 class ListProvider extends ChangeNotifier {
   List<Task> tasksList = [];
+  DateTime selectDate = DateTime.now();
 
   void getAllTasksFromFireStore() async {
     QuerySnapshot<Task> querySnapshot =
@@ -13,6 +14,27 @@ class ListProvider extends ChangeNotifier {
     tasksList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
+
+    //filtering list
+    tasksList = tasksList.where((task) {
+      if (task.dateTime?.day == selectDate.day &&
+          task.dateTime?.month == selectDate.month &&
+          task.dateTime?.year == selectDate.year) {
+        return true;
+      }
+      return false;
+    }).toList();
+
+    //sorting
+    tasksList.sort((Task task1, Task task2) {
+      return task1.dateTime!.compareTo(task2.dateTime!);
+    });
+
     notifyListeners();
+  }
+
+  void changeSelectDate(DateTime newDate) {
+    selectDate = newDate;
+    getAllTasksFromFireStore();
   }
 }
