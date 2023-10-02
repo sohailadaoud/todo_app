@@ -1,11 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/authentication%20/register/register.dart';
 import 'package:todo_app/components/custom_textform_field.dart';
+import 'package:todo_app/dialog_utlis.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String routeName = 'login';
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  var emailController = TextEditingController(text: 'sohaila@route.com');
+
+  var passwordController = TextEditingController(text: '1234567');
 
   var formKey = GlobalKey<FormState>();
 
@@ -104,9 +113,47 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void login() {
+  void login() async {
     if (formKey.currentState?.validate() == true) {
       //register
+      // todo : show loading
+      DialogUtlis.showLoading(context, 'loading...');
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+        // todo : hide loading
+        DialogUtlis.hideLoading(context);
+        // todo : show message
+        DialogUtlis.showMessage(context, 'Login Successfully',
+            title: 'Success', posActionName: 'ok');
+        print('login successfully!');
+        print(credential.user?.uid ?? '');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          // todo : hide loading
+          DialogUtlis.hideLoading(context);
+          // todo : show message
+          DialogUtlis.showMessage(context, 'No user found for that email.',
+              title: 'Error', posActionName: 'ok');
+          print('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          // todo : hide loading
+          DialogUtlis.hideLoading(context);
+          // todo : show message
+          DialogUtlis.showMessage(
+              context, 'Wrong password provided for that user.',
+              title: 'Error', posActionName: 'ok');
+          print('Wrong password provided for that user.');
+        }
+      } catch (e) {
+        // todo : hide loading
+        DialogUtlis.hideLoading(context);
+        // todo : show message
+        DialogUtlis.showMessage(context, '${e.toString()}',
+            title: 'Error', posActionName: 'ok');
+        print(e.toString());
+      }
     }
   }
 }
