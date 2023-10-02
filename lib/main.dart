@@ -5,8 +5,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Home/home_screen.dart';
 import 'package:todo_app/Home/task_list/edit_task_tab.dart';
+import 'package:todo_app/authentication%20/login/login.dart';
+import 'package:todo_app/authentication%20/register/register.dart';
 import 'package:todo_app/my_theme.dart';
-import 'package:todo_app/provider/app_config_provider.dart';
+import 'package:todo_app/providers/app_config_provider.dart';
 import 'package:todo_app/providers/list_provider.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -37,10 +39,12 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.routeName,
+      initialRoute: RegisterScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         EditTaskTab.routeName: (context) => EditTaskTab(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        RegisterScreen.routeName: (context) => RegisterScreen(),
       },
       theme: MyTheme.lightTheme,
       darkTheme: MyTheme.darkTheme,
@@ -51,11 +55,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// runApp(
-// ChangeNotifierProvider(
-// //create: (context) => AppCongigProvider(),
-// create: (context) => ListProvider(),
-//
-//
-// child: MyApp()));
-// }

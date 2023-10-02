@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/Home/settings/settings_tab.dart';
 import 'package:todo_app/Home/task_list/add_task_bottom_sheet.dart';
 import 'package:todo_app/Home/task_list/task_list_tab.dart';
-import 'package:todo_app/provider/app_config_provider.dart';
+
+import '../providers/app_config_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';

@@ -6,6 +6,7 @@ import 'package:todo_app/firebase_utils.dart';
 import 'package:todo_app/my_theme.dart';
 
 import '../../model/task.dart';
+import '../../providers/app_config_provider.dart';
 import '../../providers/list_provider.dart';
 
 class TaskWidgetItem extends StatelessWidget {
@@ -16,6 +17,7 @@ class TaskWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var listProvider = Provider.of<ListProvider>(context);
+    var provider = Provider.of<AppConfigProvider>(context);
 
     return Container(
       margin: EdgeInsets.all(10),
@@ -68,7 +70,7 @@ class TaskWidgetItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(task.title ?? '',
-                          //AppLocalizations.of(context)!.title_task,
+                          // AppLocalizations.of(context)!.title_task ?? '',
                           style:
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     color: Theme.of(context).primaryColor,

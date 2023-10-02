@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/Home/settings/language_bottom_sheet.dart';
 import 'package:todo_app/Home/settings/theme_bottom_sheet.dart';
 import 'package:todo_app/my_theme.dart';
-import 'package:todo_app/provider/app_config_provider.dart';
+
+import '../../providers/app_config_provider.dart';
 
 class SettingsTab extends StatefulWidget {
   @override
