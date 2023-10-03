@@ -28,9 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Image.asset('assets/images/background',
-          // width: double.infinity,
-          // fit: BoxFit.fill),
+          Image.asset('assets/images/background.png',
+              width: double.infinity, fit: BoxFit.fill),
           Form(
               key: formKey,
               child: SingleChildScrollView(
