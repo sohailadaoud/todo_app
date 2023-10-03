@@ -30,16 +30,25 @@ class TaskWidgetItem extends StatelessWidget {
           dismissible: DismissiblePane(onDismissed: () {}),
           children: [
             SlidableAction(
-              onPressed: (context) {
-                //delete task
-                FirebaseUtils.deleteTaskFromFireStore(
-                        task, authProvider.currentUser!.id!)
-                    .timeout(Duration(milliseconds: 500), onTimeout: () {
-                  print('todo deleted successfully !');
-                  listProvider
-                      .getAllTasksFromFireStore(authProvider.currentUser!.id!);
-                });
+              onPressed: (context) async {
+                await FirebaseUtils.deleteTaskFromFireStore(
+                    task, authProvider.currentUser!.id!);
+
+                listProvider
+                    .getAllTasksFromFireStore(authProvider.currentUser!.id!);
+                print('Task deleted successfully!');
               },
+
+              // onPressed: (context) {
+              //   //delete task
+              //   FirebaseUtils.deleteTaskFromFireStore(
+              //           task, authProvider.currentUser!.id!)
+              //       .timeout(Duration(milliseconds: 500), onTimeout: () {
+              //     print('todo deleted successfully !');
+              //     listProvider
+              //         .getAllTasksFromFireStore(authProvider.currentUser!.id!);
+              //   });
+              // },
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   bottomLeft: Radius.circular(15)),
