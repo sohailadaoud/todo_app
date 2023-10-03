@@ -7,6 +7,7 @@ import 'package:todo_app/my_theme.dart';
 
 import '../../model/task.dart';
 import '../../providers/app_config_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/list_provider.dart';
 
 class TaskWidgetItem extends StatelessWidget {
@@ -18,6 +19,7 @@ class TaskWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var listProvider = Provider.of<ListProvider>(context);
     var provider = Provider.of<AppConfigProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
 
     return Container(
       margin: EdgeInsets.all(10),
@@ -30,10 +32,12 @@ class TaskWidgetItem extends StatelessWidget {
             SlidableAction(
               onPressed: (context) {
                 //delete task
-                FirebaseUtils.deleteTaskFromFireStore(task)
+                FirebaseUtils.deleteTaskFromFireStore(
+                        task, authProvider.currentUser!.id!)
                     .timeout(Duration(milliseconds: 500), onTimeout: () {
                   print('todo deleted successfully !');
-                  listProvider.getAllTasksFromFireStore();
+                  listProvider
+                      .getAllTasksFromFireStore(authProvider.currentUser!.id!);
                 });
               },
               borderRadius: BorderRadius.only(

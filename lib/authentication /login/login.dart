@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/authentication%20/register/register.dart';
 import 'package:todo_app/components/custom_textform_field.dart';
 import 'package:todo_app/dialog_utlis.dart';
+import 'package:todo_app/firebase_utils.dart';
+
+import '../../Home/home_screen.dart';
+import '../../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login';
@@ -122,11 +127,20 @@ class _LoginScreenState extends State<LoginScreen> {
         final credential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
                 email: emailController.text, password: passwordController.text);
+        var user = await FirebaseUtils.readUserFromFireStore(
+            credential.user?.uid ?? '');
+        if (user == null) {
+          return;
+        }
+        var authProvider = Provider.of<AuthProvider>(context, listen: false);
+        authProvider.updateUser(user);
         // todo : hide loading
         DialogUtlis.hideLoading(context);
         // todo : show message
         DialogUtlis.showMessage(context, 'Login Successfully',
-            title: 'Success', posActionName: 'ok');
+            title: 'Success', posActionName: 'ok', posAction: () {
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        });
         print('login successfully!');
         print(credential.user?.uid ?? '');
       } on FirebaseAuthException catch (e) {

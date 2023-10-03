@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/Home/home_screen.dart';
 import 'package:todo_app/authentication%20/login/login.dart';
 import 'package:todo_app/components/custom_textform_field.dart';
 import 'package:todo_app/dialog_utlis.dart';
+import 'package:todo_app/firebase_utils.dart';
+import 'package:todo_app/model/my_user.dart';
+import 'package:todo_app/providers/auth_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = 'register';
@@ -13,13 +18,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   var nameController = TextEditingController(text: 'sohaila');
-
   var emailController = TextEditingController(text: 'sohaila@route.com');
-
   var passwordController = TextEditingController(text: '1234567');
-
   var confirmPasswordController = TextEditingController(text: '1234567');
-
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -139,11 +140,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: emailController.text,
           password: passwordController.text,
         );
+        MyUser myUser = MyUser(
+          id: credential.user?.uid ?? '',
+          name: nameController.text,
+          email: emailController.text,
+        );
+        await FirebaseUtils.addUserToFireStore(myUser);
+        var authProvider = Provider.of<AuthProvider>(context, listen: false);
+        authProvider.updateUser(myUser);
         // todo : hide loading
         DialogUtlis.hideLoading(context);
         // todo : show message
         DialogUtlis.showMessage(context, 'Register Successfully',
-            title: 'Success', posActionName: 'ok');
+            title: 'Success', posActionName: 'ok', posAction: () {
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        });
 
         print('register successfully!');
         print(credential.user?.uid ?? '');
