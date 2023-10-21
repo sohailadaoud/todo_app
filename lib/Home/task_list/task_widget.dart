@@ -10,16 +10,23 @@ import '../../providers/app_config_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/list_provider.dart';
 
-class TaskWidgetItem extends StatelessWidget {
+class TaskWidgetItem extends StatefulWidget {
   Task task;
 
   TaskWidgetItem({required this.task});
 
   @override
+  State<TaskWidgetItem> createState() => _TaskWidgetItemState();
+}
+
+class _TaskWidgetItemState extends State<TaskWidgetItem> {
+  @override
   Widget build(BuildContext context) {
     var listProvider = Provider.of<ListProvider>(context);
     var provider = Provider.of<AppConfigProvider>(context);
     var authProvider = Provider.of<AuthProvider>(context);
+    var uId =
+        Provider.of<AuthProvider>(context, listen: false).currentUser?.id ?? '';
 
     return Container(
       margin: EdgeInsets.all(10),
@@ -32,7 +39,7 @@ class TaskWidgetItem extends StatelessWidget {
             SlidableAction(
               onPressed: (context) async {
                 await FirebaseUtils.deleteTaskFromFireStore(
-                    task, authProvider.currentUser!.id!);
+                    widget.task, authProvider.currentUser!.id!);
 
                 listProvider
                     .getAllTasksFromFireStore(authProvider.currentUser!.id!);
@@ -72,7 +79,9 @@ class TaskWidgetItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  color: Theme.of(context).primaryColor,
+                  color: widget.task.isDone!
+                      ? MyTheme.greenColor
+                      : Theme.of(context).primaryColor,
                   height: 80,
                   width: 4,
                 ),
@@ -82,31 +91,49 @@ class TaskWidgetItem extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(task.title ?? '',
+                      child: Text(widget.task.title ?? '',
                           // AppLocalizations.of(context)!.title_task ?? '',
                           style:
                               Theme.of(context).textTheme.titleSmall!.copyWith(
-                                    color: Theme.of(context).primaryColor,
+                                    color: widget.task.isDone!
+                                        ? MyTheme.greenColor
+                                        : Theme.of(context).primaryColor,
                                   )),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(task.description ?? '',
+                      child: Text(widget.task.description ?? '',
                           //AppLocalizations.of(context)!.description,
                           style: Theme.of(context).textTheme.titleSmall),
                     ),
                   ],
                 )),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 7, horizontal: 18),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Theme.of(context).primaryColor),
-                  child: Icon(
-                    Icons.check,
-                    size: 30,
-                    color: MyTheme.whiteColor,
-                  ),
+                InkWell(
+                  onTap: () {
+                    FirebaseUtils.editIsDone(widget.task, uId);
+                    widget.task.isDone = !widget.task.isDone!;
+                    setState(() {});
+                  },
+                  child: widget.task.isDone!
+                      ? Text(
+                          'DONE!',
+                          style: TextStyle(
+                              color: MyTheme.greenColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )
+                      : Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 7, horizontal: 18),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Theme.of(context).primaryColor),
+                          child: Icon(
+                            Icons.check,
+                            size: 30,
+                            color: MyTheme.whiteColor,
+                          ),
+                        ),
                 ),
               ],
             ),
