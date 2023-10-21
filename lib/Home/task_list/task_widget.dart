@@ -68,7 +68,8 @@ class _TaskWidgetItemState extends State<TaskWidgetItem> {
         ),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(EditTaskTab.routeName);
+            Navigator.of(context)
+                .pushNamed(EditTaskTab.routeName, arguments: widget.task);
           },
           child: Container(
             padding: EdgeInsets.all(10),
